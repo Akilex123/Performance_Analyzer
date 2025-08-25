@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 public class PerformanceAnalyzer {
     public static long measureTime(Runnable task){
         long startTime = System.nanoTime();
@@ -7,10 +9,29 @@ public class PerformanceAnalyzer {
     }
 
     public static void main(String args[]){
-        long duration = measureTime(()->{
-            Array1();
-        });
-        System.out.println("Ukupno vreme je: " + duration + "ms");
+        Scanner sken = new Scanner(System.in);
+
+        System.out.println("**********");
+        System.out.println("Welcome!");
+        System.out.println("1 Measure time of one algorithm");
+        System.out.println("2 Compare times of two algorithms");
+        System.out.println("3 Exit");
+        System.out.println("**********");
+        System.out.print("Pick an option: ");
+        int choice = sken.nextInt();
+        // System.out.println(choice);
+        switch (choice){
+            case 1 -> {
+                long duration = measureTime(()->{
+                    Array1();
+                });
+                System.out.println("Vreme izvrsenja je: " + duration + "ms");
+            }
+        }
+
+
+
+
 
 
     }
