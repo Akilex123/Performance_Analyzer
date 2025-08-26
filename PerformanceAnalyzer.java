@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.LinkedList;
+import java.util.HashMap;
 
 public class PerformanceAnalyzer {
     public static long measureTime(Runnable task){
@@ -24,26 +26,85 @@ public class PerformanceAnalyzer {
             case 1:
                 System.out.println("**********");
                 System.out.println("1 - Arrays");
-                System.out.println("2 - HashMaps");
-                System.out.println("3 - Linked Lists");
+                System.out.println("2 - LinkedLists");
+                System.out.println("3 - Hashmaps");
                 System.out.print("What datastructure would you like to pick? ");
 
                 int izbor2 = sken.nextInt();
                 switch (izbor2){
+                    // ceo jedan case je za Arrays
                     case 1:
                         System.out.println("**********");
-                        System.out.println("1 - Adding 1000 numbers into a array");
+                        System.out.println("1 - Adding 1000 numbers into a Array");
+                        System.out.println("2 - Removing an element from Array");
+                        System.out.println("3 - Adding an element to Array");
                         System.out.print("What would you like to test? ");
                         int izbor3 = sken.nextInt();
                         switch (izbor3){
                             case 1: {
                                 Long duration = measureTime(()->{
-                                    Array1();
+                                    array1000();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                            }
+                            case 2:{
+                                Long duration = measureTime(()->{
+                                    arrayDelete();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                            }
+                            case 3:{
+                                Long duration = measureTime(()->{
+                                    arrayAdd();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                             }
                         }
+                        // Tek ovde pocinje ceo jedan case za LinkedLists
+                    case 2:
+                        System.out.println("**********");
+                        System.out.println("1 - Adding 1000 numbers into a LinkedList");
+                        System.out.println("2 - Removing an element from a LinkedList ");
+                        System.out.println("3 - Adding an element to LinkedList");
+                        System.out.print("What would you like to test? ");
+                        int izbor4 = sken.nextInt();
+                        switch (izbor4){
+                            case 1: {
+                                Long duration = measureTime(()->{
+                                    linkedList1000();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                        }
+                            case 2: {
+                                Long duration = measureTime(()->{
+                                    linkedListDelete();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                            }
+                            case 3: {
+                                Long duration = measureTime(()->{
+                                    linkedListAdd();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                            }
+
                 }
+                // ovo je case za Hashmap
+                    case 3:
+                        System.out.println("**********");
+                        System.out.println("1 - Adding 1000 numbers into a Hashmap pairs");
+                        System.out.println("2 - Removing an element from a Hashmap");
+                        System.out.println("3 - Adding an element to a Hashmap");
+                        System.out.print("What would you like to test? ");
+                        int izbor5 = sken.nextInt();
+                        switch (izbor5){
+                            case 1: {
+                                Long duration = measureTime(()->{
+                                    hashMap1000();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                            }
+                        }
 
 
 
@@ -52,11 +113,77 @@ public class PerformanceAnalyzer {
 
 
 
-    }}
-    public static void Array1(){
+    }
+        }
+    }
+    public static void array1000(){
+        // napravimo niz od 1000 mesta
         int[] array = new int[1000];
+        // popunimo ga kroz loop
         for (int i=0; i<array.length;i++){
             array[i] = i;
+        }
+    }
+    public static void arrayDelete(){
+        // napravimo dva niza, drugi je kraci za jedno mesto
+        int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10};
+        int[] arr2 = new int[arr.length-1];
+        // inicijalizujemo broj koji zelimo da izbrisemo
+        int j = 5;
+        // pravimo loop u kom imamo dva pointera,
+        // jedan nam sluzi za mesta u prvom nizu i uporedjivanje sa brojem jer su nam poznati nizovi,
+        // a drugi za poziciju u drugom nizu
+        for (int i = 0, k=0; i<arr.length;i++){
+            if (i!=j){
+                arr2[k] = arr[i];
+                k++;
+            }
+        }
+    }
+    public static void arrayAdd(){
+        int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10};
+        int[] arr2 = new int[arr.length+1];
+        int x = 15;
+        for (int i=0; i<arr.length; i++){
+            arr2[i] = arr[i];
+
+        }
+        arr2[arr.length]=x;
+    }
+    public static void linkedList1000(){
+        LinkedList<Integer> lista = new LinkedList<>();
+        for (int i = 0; i<1000;i++){
+            lista.add(i);
+        }
+    }
+    public static void linkedListDelete(){
+        LinkedList<Integer> lista = new LinkedList<>();
+        for (int i = 0; i<10;i++){
+            lista.add(i);
+
+        }
+        lista.removeLast();
+    }
+    public static void linkedListAdd(){
+        LinkedList<Integer> lista = new LinkedList<>();
+        for (int i = 0; i<10;i++){
+            lista.add(i);
+
+        }
+        lista.add(11);
+    }
+    public static void hashMap1000(){
+        HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
+        for (int i=0, k=1; i<1000; i++, k++){
+            mapa.put(i,k);
+
+        }
+    }
+    public static void hashMapDelete(){
+        HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
+        for (int i=0, k=1; i<10; i++, k++){
+            mapa.put(i,k);
+
         }
     }
 }
