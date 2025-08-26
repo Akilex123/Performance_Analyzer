@@ -9,6 +9,18 @@ public class PerformanceAnalyzer {
         long endTime = System.nanoTime();
         return (endTime - startTime)/1000;
     }
+    public static long measureMemory(Runnable task){
+        System.gc();
+        Runtime runtime = Runtime.getRuntime();
+        long before = runtime.totalMemory() - runtime.freeMemory();
+
+        task.run();
+
+        long after = runtime.totalMemory() - runtime.freeMemory();
+
+        return after - before;
+
+    }
 
     public static void main(String args[]){
         Scanner sken = new Scanner(System.in);
@@ -45,21 +57,34 @@ public class PerformanceAnalyzer {
                                 Long duration = measureTime(()->{
                                     array1000();
                                 });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1000();
+                                });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                break;
                             }
                             case 2:{
                                 Long duration = measureTime(()->{
                                     arrayDelete();
                                 });
+                                Long memoryUsage = measureMemory(()->{
+                                    arrayDelete();
+                                });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                break;
                             }
                             case 3:{
                                 Long duration = measureTime(()->{
                                     arrayAdd();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                break;
                             }
+
                         }
+                        break;
                         // Tek ovde pocinje ceo jedan case za LinkedLists
                     case 2:
                         System.out.println("**********");
@@ -74,21 +99,25 @@ public class PerformanceAnalyzer {
                                     linkedList1000();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                break;
                         }
                             case 2: {
                                 Long duration = measureTime(()->{
                                     linkedListDelete();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                break;
                             }
                             case 3: {
                                 Long duration = measureTime(()->{
                                     linkedListAdd();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                break;
                             }
 
                 }
+                        break;
                 // ovo je case za Hashmap
                     case 3:
                         System.out.println("**********");
@@ -101,6 +130,20 @@ public class PerformanceAnalyzer {
                             case 1: {
                                 Long duration = measureTime(()->{
                                     hashMap1000();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                break;
+                            }
+                            case 2: {
+                                Long duration = measureTime(()->{
+                                    hashMapDelete();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                break;
+                            }
+                            case 3: {
+                                Long duration = measureTime(()->{
+                                    hashMapAdd();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                             }
@@ -118,7 +161,7 @@ public class PerformanceAnalyzer {
     }
     public static void array1000(){
         // napravimo niz od 1000 mesta
-        int[] array = new int[1000];
+        int[] array = new int[100000];
         // popunimo ga kroz loop
         for (int i=0; i<array.length;i++){
             array[i] = i;
@@ -126,19 +169,15 @@ public class PerformanceAnalyzer {
     }
     public static void arrayDelete(){
         // napravimo dva niza, drugi je kraci za jedno mesto
-        int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10};
-        int[] arr2 = new int[arr.length-1];
-        // inicijalizujemo broj koji zelimo da izbrisemo
-        int j = 5;
-        // pravimo loop u kom imamo dva pointera,
-        // jedan nam sluzi za mesta u prvom nizu i uporedjivanje sa brojem jer su nam poznati nizovi,
-        // a drugi za poziciju u drugom nizu
-        for (int i = 0, k=0; i<arr.length;i++){
-            if (i!=j){
-                arr2[k] = arr[i];
-                k++;
+        int[] array = new int[100000];
+        // popunimo ga kroz loop
+        for (int i=0; i<array.length;i++){
+            if (i%2 != 0){
+                array[i] = i;
             }
+
         }
+
     }
     public static void arrayAdd(){
         int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10};
@@ -185,5 +224,14 @@ public class PerformanceAnalyzer {
             mapa.put(i,k);
 
         }
+        mapa.remove(3);
+    }
+    public static void hashMapAdd(){
+        HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
+        for (int i=0, k=1; i<10; i++, k++){
+            mapa.put(i,k);
+
+        }
+        mapa.put(11,12);
     }
 }
