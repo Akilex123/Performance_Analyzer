@@ -55,10 +55,10 @@ public class PerformanceAnalyzer {
                         switch (izbor3){
                             case 1: {
                                 Long duration = measureTime(()->{
-                                    array1000();
+                                    array100000();
                                 });
                                 Long memoryUsage = measureMemory(()->{
-                                    array1000();
+                                    array100000();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
@@ -66,10 +66,10 @@ public class PerformanceAnalyzer {
                             }
                             case 2:{
                                 Long duration = measureTime(()->{
-                                    arrayDelete();
+                                    arrayOddNums();
                                 });
                                 Long memoryUsage = measureMemory(()->{
-                                    arrayDelete();
+                                    arrayOddNums();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
@@ -159,15 +159,15 @@ public class PerformanceAnalyzer {
     }
         }
     }
-    public static void array1000(){
-        // napravimo niz od 1000 mesta
+    public static void array100000(){
+        // napravimo niz od 100000 mesta
         int[] array = new int[100000];
         // popunimo ga kroz loop
         for (int i=0; i<array.length;i++){
             array[i] = i;
         }
     }
-    public static void arrayDelete(){
+    public static void arrayOddNums(){
         // napravimo dva niza, drugi je kraci za jedno mesto
         int[] array = new int[100000];
         // popunimo ga kroz loop
