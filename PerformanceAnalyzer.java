@@ -1,6 +1,7 @@
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.HashMap;
+import java.util.Random;
 
 public class PerformanceAnalyzer {
     public static long measureTime(Runnable task){
@@ -40,6 +41,7 @@ public class PerformanceAnalyzer {
                 System.out.println("1 - Arrays");
                 System.out.println("2 - LinkedLists");
                 System.out.println("3 - Hashmaps");
+                System.out.println("4 - Sorting algotithms");
                 System.out.print("What datastructure would you like to pick? ");
 
                 int izbor2 = sken.nextInt();
@@ -175,7 +177,50 @@ public class PerformanceAnalyzer {
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                             }
+
+
                         }
+                     // case za sorting algoritme
+                    case 4:
+                        System.out.println("**********");
+                        System.out.println("1 - Bubble Sort");
+                        System.out.println("2 - Removing an element from a Hashmap");
+                        System.out.println("3 - Adding an element to a Hashmap");
+                        System.out.print("What would you like to test? ");
+                        int izbor6 = sken.nextInt();
+                        switch (izbor6){
+                            case 1: {
+                                Long duration = measureTime(()->{
+                                    bubbleSort();
+                                });
+                                Long memoryUsage = measureMemory(()->{
+                                    bubbleSort();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                break;
+                            }
+                            case 2: {
+                                Long duration = measureTime(()->{
+                                    hashMapDelete();
+                                });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                break;
+                            }
+                            case 3: {
+                                Long duration = measureTime(()->{
+                                    hashMapAdd();
+                                });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                            }}
 
 
 
@@ -268,4 +313,29 @@ public class PerformanceAnalyzer {
         }
         mapa.put(1001,1002);
     }
+    /////////////////// sorting algos
+    public static void bubbleSort(){
+        int[] arr = new int[100];
+        int n = arr.length; // iniciramo n koje ce nam kasnije biti poslednji broj u nizu
+        Random random = new Random();
+        for (int i=0; i<arr.length; i++){
+            arr[i] = random.nextInt(100000);
+        } // pravimo niz koji ima 100 vrednosti, svaka je random u opsegu 0 do ovaj broj iznad
+        int i,j,temp; // iniciramo dve varijable za prolazak kroz niz i jednu kako bismo mogli da sortujemo niz tj da swapujemo vrednosti
+        boolean swapped; // indikator iliti zastavica da vidimo da li se promena desila ili ne
+        for (i = 0; i<n-1; i++){ // idemo do jednog broja pre kraja kako bismo mogli da ga zamenimo sa poslednjim, ovo je pokazatelj koliko puta idemo kroz niz, ovde se i menja samo kada se zavrsi ceo for loop unutar njega tj kada najveci broj bude na kraju liste
+            swapped = false;
+            for (j=0; j<n-i-1; j++){ // ovo je unutrasnji loop koji se izvrsava dok najveci broj ne bude na kraju, on se izvrsava sa sve manjim obimom svaki put jer su najveci brojevi vec pogurani na kraj
+                if (arr[j]>arr[j+1]){ // proveravamo da li je broj na jednoj poziciji veci od broja na sledecoj
+                    temp = arr[j];
+                    arr[j] = arr[j+1];
+                    arr[j+1] = temp;
+                    swapped = true; // ako jeste odradjujemo swap i menjamo indikator da je swap izvrsen, ako nije j se samo pomera za jedno mesto i uporedjuje sa sledecim brojem, tim putem se najveci gura na kraj
+                }
+            }
+            if (swapped == false) break;
+        }
+
+    }
+
 }
