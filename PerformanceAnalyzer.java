@@ -184,7 +184,7 @@ public class PerformanceAnalyzer {
                     case 4:
                         System.out.println("**********");
                         System.out.println("1 - Bubble Sort");
-                        System.out.println("2 - Removing an element from a Hashmap");
+                        System.out.println("2 - Selection Sort");
                         System.out.println("3 - Adding an element to a Hashmap");
                         System.out.print("What would you like to test? ");
                         int izbor6 = sken.nextInt();
@@ -202,10 +202,10 @@ public class PerformanceAnalyzer {
                             }
                             case 2: {
                                 Long duration = measureTime(()->{
-                                    hashMapDelete();
+                                    selectionSort();
                                 });
                                 Long memoryUsage = measureMemory(()->{
-                                    array1m();
+                                    selectionSort();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
@@ -313,7 +313,9 @@ public class PerformanceAnalyzer {
         }
         mapa.put(1001,1002);
     }
+
     /////////////////// sorting algos
+
     public static void bubbleSort(){
         int[] arr = new int[100];
         int n = arr.length; // iniciramo n koje ce nam kasnije biti poslednji broj u nizu
@@ -336,6 +338,25 @@ public class PerformanceAnalyzer {
             if (swapped == false) break;
         }
 
+    }
+    public static void selectionSort(){
+        int[] arr = new int[100];
+        Random random = new Random();
+        for (int i=0; i<arr.length; i++){
+            arr[i] = random.nextInt(100000);
+        }
+        int n = arr.length;
+        for (int i = 0; i<n-1; i++){
+            int min = i; // iniciramo minimum vrednost jer predopostavljamo da je najmanja vrednost na prvom mestu, kasnije koristimo za poziciju
+            for (int j = i+1; j<n; j++){ // ovaj for loop sluzi samo da nadje najmanju vrednost zapravo
+                if (arr[j]<arr[min]){// loop krece od prve pozicije u nizu posle prve i proverava vrednosti da li su manje od prve
+                    min = j; // ako jesu minimum index vrednost prebacujemo u tu vrednost
+                }
+            }
+            int temp = arr[i];
+            arr[i] = arr[min];
+            arr[min] = temp;
+        } // zatim koristimo taj index gde smo nasli najmanju vrednost da ga prebacimo na prvo mesto i zatim se tek spoljni loop prebacuje na sledecu poziciju
     }
 
 }
