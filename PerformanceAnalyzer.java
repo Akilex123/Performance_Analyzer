@@ -42,7 +42,8 @@ public class PerformanceAnalyzer {
                 System.out.println("2 - LinkedLists");
                 System.out.println("3 - Hashmaps");
                 System.out.println("4 - Sorting algotithms");
-                System.out.print("What datastructure would you like to pick? ");
+                System.out.println("5 - Searching algotithms");
+                System.out.print("What datastructure or algorithm would you like to pick? ");
 
                 int izbor2 = sken.nextInt();
                 switch (izbor2){
@@ -221,6 +222,37 @@ public class PerformanceAnalyzer {
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                             }}
+                        // case za search algoritme
+                    case 5:
+                        System.out.println("**********");
+                        System.out.println("1 - Linear Search");
+                        System.out.println("2 - Binary Search");
+                        System.out.print("What would you like to test? ");
+                        int izbor7 = sken.nextInt();
+                        switch (izbor7){
+                            case 1: {
+                                Long duration = measureTime(()->{
+                                    linearSearch(50);
+                                });
+                                Long memoryUsage = measureMemory(()->{
+                                    bubbleSort();
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                break;
+                            }
+                            case 2: {
+                                Long duration = measureTime(()->{
+                                    selectionSort();
+                                });
+                                Long memoryUsage = measureMemory(()->{
+                                    binarySearch(15);
+                                });
+                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                break;
+                            }
+                            }
 
 
 
@@ -386,6 +418,31 @@ public class PerformanceAnalyzer {
             if (arr[i] ==x){
                 return i;
             }
+
+        }
+        return -1;
+    }
+    public static int binarySearch(int a){
+        int[] arr = new int[100];
+        Random random = new Random();
+        for (int i=0; i<arr.length; i++){
+            arr[i] = i;
+        }
+        int x = random.nextInt(100);
+        int l=0;
+        int r=arr.length;
+        while (l<=r){
+            int m = (l+r)/2;
+            if (arr[m]==x){
+                return m;
+            }
+            else if(arr[m]>x){
+                r=m-1;
+            }
+            else {
+                l = m+1;
+            }
+
 
         }
         return -1;
