@@ -55,10 +55,10 @@ public class PerformanceAnalyzer {
                         switch (izbor3){
                             case 1: {
                                 Long duration = measureTime(()->{
-                                    array100000();
+                                    array1m();
                                 });
                                 Long memoryUsage = measureMemory(()->{
-                                    array100000();
+                                    array1m();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
@@ -66,10 +66,10 @@ public class PerformanceAnalyzer {
                             }
                             case 2:{
                                 Long duration = measureTime(()->{
-                                    arrayOddNums();
+                                    arrayDelete();
                                 });
                                 Long memoryUsage = measureMemory(()->{
-                                    arrayOddNums();
+                                    arrayDelete();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
@@ -79,7 +79,11 @@ public class PerformanceAnalyzer {
                                 Long duration = measureTime(()->{
                                     arrayAdd();
                                 });
+                                Long memoryUsage = measureMemory(()->{
+                                    arrayAdd();
+                                });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                                 break;
                             }
 
@@ -96,23 +100,35 @@ public class PerformanceAnalyzer {
                         switch (izbor4){
                             case 1: {
                                 Long duration = measureTime(()->{
-                                    linkedList1000();
+                                    linkedList1m();
+                                });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                                 break;
                         }
                             case 2: {
                                 Long duration = measureTime(()->{
                                     linkedListDelete();
                                 });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
+                                });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 3: {
                                 Long duration = measureTime(()->{
                                     linkedListAdd();
                                 });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
+                                });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                                 break;
                             }
 
@@ -129,23 +145,35 @@ public class PerformanceAnalyzer {
                         switch (izbor5){
                             case 1: {
                                 Long duration = measureTime(()->{
-                                    hashMap1000();
+                                    hashMap1m();
+                                });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 2: {
                                 Long duration = measureTime(()->{
                                     hashMapDelete();
                                 });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
+                                });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 3: {
                                 Long duration = measureTime(()->{
                                     hashMapAdd();
                                 });
+                                Long memoryUsage = measureMemory(()->{
+                                    array1m();
+                                });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
+                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
                             }
                         }
 
@@ -159,23 +187,29 @@ public class PerformanceAnalyzer {
     }
         }
     }
-    public static void array100000(){
+    public static void array1m(){
         // napravimo niz od 100000 mesta
-        int[] array = new int[100000];
+        int[] array = new int[1000000];
         // popunimo ga kroz loop
         for (int i=0; i<array.length;i++){
             array[i] = i;
         }
     }
-    public static void arrayOddNums(){
+    public static void arrayDelete(){
         // napravimo dva niza, drugi je kraci za jedno mesto
         int[] array = new int[100000];
         // popunimo ga kroz loop
         for (int i=0; i<array.length;i++){
-            if (i%2 != 0){
-                array[i] = i;
-            }
+            array[i] = i;
 
+        }
+        int[] newArray = new int[array.length-1];
+        int j = 3;
+        for (int i=0, k=0; i<array.length; i++){
+            if (i!=j){
+                newArray[k] = array[i];
+                k++; // pravimo jednostavan algoritam za pravljenje novog niza, samo sto preskacemo broj koji zelimo da obrisemo
+            }
         }
 
     }
@@ -189,15 +223,15 @@ public class PerformanceAnalyzer {
         }
         arr2[arr.length]=x;
     }
-    public static void linkedList1000(){
+    public static void linkedList1m(){
         LinkedList<Integer> lista = new LinkedList<>();
-        for (int i = 0; i<1000;i++){
+        for (int i = 0; i<1000000;i++){
             lista.add(i);
         }
     }
     public static void linkedListDelete(){
         LinkedList<Integer> lista = new LinkedList<>();
-        for (int i = 0; i<10;i++){
+        for (int i = 0; i<1000000;i++){
             lista.add(i);
 
         }
@@ -205,33 +239,33 @@ public class PerformanceAnalyzer {
     }
     public static void linkedListAdd(){
         LinkedList<Integer> lista = new LinkedList<>();
-        for (int i = 0; i<10;i++){
+        for (int i = 0; i<1000000;i++){
             lista.add(i);
 
         }
-        lista.add(11);
+        lista.add(10000000);
     }
-    public static void hashMap1000(){
+    public static void hashMap1m(){
         HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
-        for (int i=0, k=1; i<1000; i++, k++){
+        for (int i=0, k=1; i<1000000; i++, k++){
             mapa.put(i,k);
 
         }
     }
     public static void hashMapDelete(){
         HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
-        for (int i=0, k=1; i<10; i++, k++){
+        for (int i=0, k=1; i<1000; i++, k++){
             mapa.put(i,k);
 
         }
-        mapa.remove(3);
+        mapa.values().removeIf(v->v%2 ==0); // omogucava nam da iteriramo kroz vrednosti mape i obrisemo parne brojeve
     }
     public static void hashMapAdd(){
         HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
-        for (int i=0, k=1; i<10; i++, k++){
+        for (int i=0, k=1; i<1000; i++, k++){
             mapa.put(i,k);
 
         }
-        mapa.put(11,12);
+        mapa.put(1001,1002);
     }
 }
