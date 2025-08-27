@@ -374,5 +374,20 @@ public class PerformanceAnalyzer {
             arr[j+1] = key; // sada postavljamo key na poziciju koja nam je slobodna jer smo je oslobodili gore, kada se ovo zavrsi i se povecava i gleda narednu poziciju
         }
     }
+    //////////////// search algos
+    public static int linearSearch(int a){
+        int[] arr = new int[100];
+        Random random = new Random();
+        for (int i=0; i<arr.length; i++){
+            arr[i] = i;
+        }
+        int x = random.nextInt(100);
+        for (int i=0; i<arr.length; i++){
+            if (arr[i] ==x){
+                return i;
+            }
 
+        }
+        return -1;
+    }
 }
