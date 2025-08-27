@@ -185,7 +185,7 @@ public class PerformanceAnalyzer {
                         System.out.println("**********");
                         System.out.println("1 - Bubble Sort");
                         System.out.println("2 - Selection Sort");
-                        System.out.println("3 - Adding an element to a Hashmap");
+                        System.out.println("3 - Insertion Sort");
                         System.out.print("What would you like to test? ");
                         int izbor6 = sken.nextInt();
                         switch (izbor6){
@@ -213,10 +213,10 @@ public class PerformanceAnalyzer {
                             }
                             case 3: {
                                 Long duration = measureTime(()->{
-                                    hashMapAdd();
+                                    insertionSort();
                                 });
                                 Long memoryUsage = measureMemory(()->{
-                                    array1m();
+                                    insertionSort();
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
@@ -357,6 +357,22 @@ public class PerformanceAnalyzer {
             arr[i] = arr[min];
             arr[min] = temp;
         } // zatim koristimo taj index gde smo nasli najmanju vrednost da ga prebacimo na prvo mesto i zatim se tek spoljni loop prebacuje na sledecu poziciju
+    }
+    public static void insertionSort(){
+        int[] arr = new int[100];
+        Random random = new Random();
+        for (int i=0; i<arr.length; i++){
+            arr[i] = random.nextInt(100000);
+        }
+        for (int i = 1; i<arr.length; i++){ // krecemo se redom pozicijama u nizu
+            int key = arr[i]; // pravimo predpostavku da je prvi element na mestu na kom treba da bude, tj key nam sluzi da ubacimo narednu sortiranu vrednost u niz
+            int j = i-1; // vrednost j krece od jednog mesta ranije, iniciramo ga sa prvom pozicijom u nizu
+            while(j>=0 && arr[j]>key){ // zatim gledamo da ako je trenutni element veci od key treba da izvrsimo sledeci kod
+                arr[j+1] = arr[j]; // pomeramo element udesno, znaci ovo nije swap vec samo pomeranje kako bismo key stavili na pravu poziciju
+                j = j-1; // index pomeramo NALEVO zato sto time proveravamo sve vrednosti od ranije da li su vece od key kako bismo znali gde da ga stavimo
+            } // kada se petlja zavrsi ili smo dosli do kraja liste nalevo (j==-1) ili ili smo nasli element koji je manji od key
+            arr[j+1] = key; // sada postavljamo key na poziciju koja nam je slobodna jer smo je oslobodili gore, kada se ovo zavrsi i se povecava i gleda narednu poziciju
+        }
     }
 
 }
