@@ -22,35 +22,85 @@ public class PerformanceAnalyzer {
         return after - before;
 
     }
+    public static void compareAlgorithms(Runnable alg1, Runnable alg2){
+        long time1 = measureTime(alg1);
+        long time2 = measureTime(alg2);
+
+        long mem1 = measureMemory(alg1);
+        long mem2 = measureMemory(alg2);
+        System.out.println("Results:");
+        if (time1<time2){
+            System.out.println("First algorithm is faster.");
+        } else if (time2>time1) {
+            System.out.println("Second algorithm is faster.");
+        }
+        else {
+            System.out.println("They are equaly fast");
+        }
+        if (mem1<mem2){
+            System.out.println("First algorithm takes less space.");
+        }
+        else if (mem2>mem1) {
+            System.out.println("Second algorithm takes less space.");
+        }
+        else {
+            System.out.println("They both take equal amount of space.");
+        }
+    }
+    public static Runnable getAlgorithm(int choice){
+        switch (choice){
+            case 1: return ()-> array1m();
+            case 2: return ()-> arrayDelete();
+            case 3: return ()-> arrayAdd();
+            case 4: return ()-> linkedList1m();
+            case 5: return ()-> linkedListDelete();
+            case 6: return ()-> linkedListAdd();
+            case 7: return ()-> hashMap1m();
+            case 8: return ()-> hashMapDelete();
+            case 9: return ()-> hashMapAdd();
+            case 10: return ()-> bubbleSort();
+            case 11: return ()-> insertionSort();
+            case 12: return ()-> selectionSort();
+            case 13: return ()-> binarySearch(50);
+            case 14: return ()-> linearSearch(50);
+            default: return null;
+        }
+    }
 
     public static void main(String args[]){
         Scanner sken = new Scanner(System.in);
+        boolean running = true;
+        while(running){
 
         System.out.println("**********");
         System.out.println("Welcome!");
-        System.out.println("1 - Measure time of one algorithm");
-        System.out.println("2 - Compare times of two algorithms");
+        System.out.println("1 - Measure time and memory usage of one algorithm");
+        System.out.println("2 - Compare two algorithms");
         System.out.println("3 - Exit");
         System.out.print("Pick an option: ");
 
         int choice = sken.nextInt();
         // System.out.println(choice);
         switch (choice){
+            // case 1 za pojedinacno gledanje vremena i memorije koju zauzima
             case 1:
-                System.out.println("**********");
-                System.out.println("1 - Arrays");
-                System.out.println("2 - LinkedLists");
-                System.out.println("3 - Hashmaps");
-                System.out.println("4 - Sorting algotithms");
-                System.out.println("5 - Searching algotithms");
-                System.out.print("What datastructure or algorithm would you like to pick? ");
+                    System.out.println("**********");
+                    System.out.println("1 - Arrays");
+                    System.out.println("2 - LinkedLists");
+                    System.out.println("3 - Hashmaps");
+                    System.out.println("4 - Sorting algotithms");
+                    System.out.println("5 - Searching algotithms");
+                    System.out.println("6 - Back");
+                    System.out.print("What datastructure or algorithm would you like to pick? ");
+
+
 
                 int izbor2 = sken.nextInt();
                 switch (izbor2){
                     // ceo jedan case je za Arrays
                     case 1:
                         System.out.println("**********");
-                        System.out.println("1 - Adding 1000 numbers into a Array");
+                        System.out.println("1 - Adding 1m numbers into a Array");
                         System.out.println("2 - Removing an element from Array");
                         System.out.println("3 - Adding an element to Array");
                         System.out.print("What would you like to test? ");
@@ -95,7 +145,7 @@ public class PerformanceAnalyzer {
                         // Tek ovde pocinje ceo jedan case za LinkedLists
                     case 2:
                         System.out.println("**********");
-                        System.out.println("1 - Adding 1000 numbers into a LinkedList");
+                        System.out.println("1 - Adding 1m numbers into a LinkedList");
                         System.out.println("2 - Removing an element from a LinkedList ");
                         System.out.println("3 - Adding an element to LinkedList");
                         System.out.print("What would you like to test? ");
@@ -140,7 +190,7 @@ public class PerformanceAnalyzer {
                 // ovo je case za Hashmap
                     case 3:
                         System.out.println("**********");
-                        System.out.println("1 - Adding 1000 numbers into a Hashmap pairs");
+                        System.out.println("1 - Adding 1m numbers into a Hashmap pairs");
                         System.out.println("2 - Removing an element from a Hashmap");
                         System.out.println("3 - Adding an element to a Hashmap");
                         System.out.print("What would you like to test? ");
@@ -261,9 +311,52 @@ public class PerformanceAnalyzer {
 
 
 
+
     }
+            case 2:
+                System.out.println("Izaberite 2 algoritma");
+                System.out.println("1 - Adding 1m numbers into a Array");
+                System.out.println("2 - Removing an element from Array");
+                System.out.println("3 - Adding an element to Array");
+                System.out.println("***********");
+                System.out.println("4 - Adding 1m numbers into a LinkedList");
+                System.out.println("5 - Removing an element from a LinkedList ");
+                System.out.println("6 - Adding an element to LinkedList");
+                System.out.println("***********");
+                System.out.println("7 - Adding 1m numbers into a Hashmap pairs");
+                System.out.println("8 - Removing an element from a Hashmap");
+                System.out.println("9 - Adding an element to a Hashmap");
+                System.out.println("***********");
+                System.out.println("10 - Bubble Sort");
+                System.out.println("11 - Selection Sort");
+                System.out.println("12 - Insertion Sort");
+                System.out.println("***********");
+                System.out.println("13 - Linear Search");
+                System.out.println("14 - Binary Search");
+                System.out.println("***********");
+
+                System.out.print("Pick first algorithm: ");
+                int alg1Choice = sken.nextInt();
+                Runnable alg1 = getAlgorithm(alg1Choice);
+
+                System.out.print("Pick second algorithm: ");
+                int alg2Choice = sken.nextInt();
+                Runnable alg2 = getAlgorithm(alg2Choice);
+
+                if (alg1 != null && alg2 != null){
+                    compareAlgorithms(alg1,alg2);
+                }
+                else {
+                    System.out.println("You didn't pick the correct numbers.");
+                }
+            case 3:
+                System.out.println("Thanks for using this little application :D ");
+                running = false;
+                break;
         }
-    }
+
+
+    }}
     public static void array1m(){
         // napravimo niz od 100000 mesta
         int[] array = new int[1000000];
@@ -407,6 +500,7 @@ public class PerformanceAnalyzer {
         }
     }
     //////////////// search algos
+
     public static int linearSearch(int a){
         int[] arr = new int[100];
         Random random = new Random();
