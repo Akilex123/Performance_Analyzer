@@ -114,8 +114,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     array1m();// metodi prosledjujemo algoritam koji smo napravili kako bismo izmerili koliko memorije zauzima
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 2:{
@@ -125,8 +125,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     arrayDelete();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 3:{
@@ -136,8 +136,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     arrayAdd();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
 
@@ -159,8 +159,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     array1m();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                         }
                             case 2: {
@@ -170,8 +170,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     array1m();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 3: {
@@ -181,8 +181,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     array1m();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
 
@@ -204,8 +204,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     array1m();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 2: {
@@ -215,8 +215,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     array1m();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 3: {
@@ -226,8 +226,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     array1m();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                             }
 
 
@@ -248,8 +248,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     bubbleSort();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 2: {
@@ -259,8 +259,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     selectionSort();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 3: {
@@ -270,8 +270,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     insertionSort();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                             }}
                         // case za search algoritme
                     case 5:
@@ -288,8 +288,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     bubbleSort();
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             case 2: {
@@ -299,8 +299,8 @@ public class PerformanceAnalyzer {
                                 Long memoryUsage = measureMemory(()->{
                                     binarySearch(15);
                                 });
-                                System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
-                                System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
+                                System.out.println("The time required for this algorithm is: " + duration + "ms");
+                                System.out.println("The memory occupied by this algorithm is: " + memoryUsage + " bajta");
                                 break;
                             }
                             }
