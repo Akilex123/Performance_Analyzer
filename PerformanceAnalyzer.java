@@ -4,25 +4,25 @@ import java.util.HashMap;
 import java.util.Random;
 
 public class PerformanceAnalyzer {
-    public static long measureTime(Runnable task){
-        long startTime = System.nanoTime();
-        task.run();
-        long endTime = System.nanoTime();
-        return (endTime - startTime)/1000;
+    public static long measureTime(Runnable task){ // metoda koju koristimo kako bismo izmerili vreme, uzimamo Runnable interfejs kako bismo mogli da pokrenemo .run() na metodi koju prosledimo
+        long startTime = System.nanoTime(); // varijabla koja krece da meri vreme
+        task.run(); // ovde zovemo metodu .run() na algoritmu ili metodi koju prosledimo
+        long endTime = System.nanoTime(); // varijabla koja prekida merenje vremena
+        return (endTime - startTime)/1000; // vracamo vreme u milisekundama
     }
-    public static long measureMemory(Runnable task){
-        System.gc();
-        Runtime runtime = Runtime.getRuntime();
-        long before = runtime.totalMemory() - runtime.freeMemory();
+    public static long measureMemory(Runnable task){ // metoda koja nam vraca koliko je memorije utroseno za odredjeni algoritam koji prosledimo
+        System.gc(); // koristimo ovu metodu kako bismo ocistili memoriju pre merenja
+        Runtime runtime = Runtime.getRuntime(); // pravimo varijablu klase Runtime kako bismo mogli preko nje da proverimo zauzetost memorije pre i posle algoritma
+        long before = runtime.totalMemory() - runtime.freeMemory(); // pravimo varijavblu u kojoj snimamo situaciju u memoriji pre izvrsenja algoritma
 
         task.run();
 
-        long after = runtime.totalMemory() - runtime.freeMemory();
+        long after = runtime.totalMemory() - runtime.freeMemory(); // pravimo varijablu za proveru memorije nakon izvrsenja algoritma
 
-        return after - before;
+        return after - before; // vracamo razliku tj koliko je memorije zauzeo algoritam
 
     }
-    public static void compareAlgorithms(Runnable alg1, Runnable alg2){
+    public static void compareAlgorithms(Runnable alg1, Runnable alg2){ // metoda za uporedjivanje algoritama
         long time1 = measureTime(alg1);
         long time2 = measureTime(alg2);
 
@@ -47,7 +47,7 @@ public class PerformanceAnalyzer {
             System.out.println("They both take equal amount of space.");
         }
     }
-    public static Runnable getAlgorithm(int choice){
+    public static Runnable getAlgorithm(int choice){ // metoda koja uzima broj algoritama koji smo izabrali i izvrsava algoritam prema tome
         switch (choice){
             case 1: return ()-> array1m();
             case 2: return ()-> arrayDelete();
@@ -69,7 +69,7 @@ public class PerformanceAnalyzer {
 
     public static void main(String args[]){
         Scanner sken = new Scanner(System.in);
-        boolean running = true;
+        boolean running = true; // potrebno za izlazak iz programa
         while(running){
 
         System.out.println("**********");
@@ -107,11 +107,12 @@ public class PerformanceAnalyzer {
                         int izbor3 = sken.nextInt();
                         switch (izbor3){
                             case 1: {
+
                                 Long duration = measureTime(()->{
-                                    array1m();
+                                    array1m(); // metodi prosledjujemo algoritam koji smo napravili kako bismo mu izmerili vreme
                                 });
                                 Long memoryUsage = measureMemory(()->{
-                                    array1m();
+                                    array1m();// metodi prosledjujemo algoritam koji smo napravili kako bismo izmerili koliko memorije zauzima
                                 });
                                 System.out.println("Vreme koje je potrebno za ovaj algoritam je: " + duration + "ms");
                                 System.out.println("Memorija koju je zauzeo ovaj algoritam iznosi: " + memoryUsage + " bajta");
@@ -313,6 +314,7 @@ public class PerformanceAnalyzer {
 
 
     }
+            // odavde tek krece case za opciju 2 u glavnom meniju
             case 2:
                 System.out.println("Izaberite 2 algoritma");
                 System.out.println("1 - Adding 1m numbers into a Array");
@@ -357,24 +359,24 @@ public class PerformanceAnalyzer {
 
 
     }}
-    public static void array1m(){
-        // napravimo niz od 100000 mesta
+    public static void array1m(){ // metoda  za popunjavanje niza sa 1m clanova
+        // napravimo niz od 1m mesta
         int[] array = new int[1000000];
         // popunimo ga kroz loop
         for (int i=0; i<array.length;i++){
             array[i] = i;
         }
     }
-    public static void arrayDelete(){
-        // napravimo dva niza, drugi je kraci za jedno mesto
+    public static void arrayDelete(){ // metoda za brisanje jednog elementa iz niza
+       // ponovo napravimo niz
         int[] array = new int[100000];
         // popunimo ga kroz loop
         for (int i=0; i<array.length;i++){
             array[i] = i;
 
         }
-        int[] newArray = new int[array.length-1];
-        int j = 3;
+        int[] newArray = new int[array.length-1]; // napravimo novi niz za jedno mesto manji (zelimo da obrisemo element)
+        int j = 3; // inicijalizujemo broj koji zelimo da obrisemo
         for (int i=0, k=0; i<array.length; i++){
             if (i!=j){
                 newArray[k] = array[i];
@@ -383,7 +385,7 @@ public class PerformanceAnalyzer {
         }
 
     }
-    public static void arrayAdd(){
+    public static void arrayAdd(){ // metoda za dodavanje jednog broja u niz
         int[] arr = new int[]{1,2,3,4,5,6,7,8,9,10};
         int[] arr2 = new int[arr.length+1];
         int x = 15;
@@ -393,13 +395,13 @@ public class PerformanceAnalyzer {
         }
         arr2[arr.length]=x;
     }
-    public static void linkedList1m(){
-        LinkedList<Integer> lista = new LinkedList<>();
+    public static void linkedList1m(){ // metoda za pravljenje linked liste od milion clanova
+        LinkedList<Integer> lista = new LinkedList<>(); // pravimo linked listu i popunjavamo je
         for (int i = 0; i<1000000;i++){
             lista.add(i);
         }
     }
-    public static void linkedListDelete(){
+    public static void linkedListDelete(){ // metoda za brisanje poslednjeg broja u linked listi
         LinkedList<Integer> lista = new LinkedList<>();
         for (int i = 0; i<1000000;i++){
             lista.add(i);
@@ -407,7 +409,7 @@ public class PerformanceAnalyzer {
         }
         lista.removeLast();
     }
-    public static void linkedListAdd(){
+    public static void linkedListAdd(){ // metoda za dodavanje broja na kraj linked liste
         LinkedList<Integer> lista = new LinkedList<>();
         for (int i = 0; i<1000000;i++){
             lista.add(i);
@@ -415,14 +417,14 @@ public class PerformanceAnalyzer {
         }
         lista.add(10000000);
     }
-    public static void hashMap1m(){
+    public static void hashMap1m(){ // pravljenje mape od 1m kljuceva
         HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
         for (int i=0, k=1; i<1000000; i++, k++){
             mapa.put(i,k);
 
         }
     }
-    public static void hashMapDelete(){
+    public static void hashMapDelete(){ // metoda koja brise sve vrednosti mape koje su parne
         HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
         for (int i=0, k=1; i<1000; i++, k++){
             mapa.put(i,k);
@@ -430,7 +432,7 @@ public class PerformanceAnalyzer {
         }
         mapa.values().removeIf(v->v%2 ==0); // omogucava nam da iteriramo kroz vrednosti mape i obrisemo parne brojeve
     }
-    public static void hashMapAdd(){
+    public static void hashMapAdd(){ // mapa koja dodaje jedan kljuc i jednu vrednost na kraju mape
         HashMap<Integer,Integer> mapa = new HashMap<Integer, Integer>();
         for (int i=0, k=1; i<1000; i++, k++){
             mapa.put(i,k);
@@ -441,7 +443,7 @@ public class PerformanceAnalyzer {
 
     /////////////////// sorting algos
 
-    public static void bubbleSort(){
+    public static void bubbleSort(){ // bubble sort algoritam
         int[] arr = new int[100];
         int n = arr.length; // iniciramo n koje ce nam kasnije biti poslednji broj u nizu
         Random random = new Random();
@@ -464,13 +466,13 @@ public class PerformanceAnalyzer {
         }
 
     }
-    public static void selectionSort(){
+    public static void selectionSort(){ // selection sort algoritam
         int[] arr = new int[100];
         Random random = new Random();
         for (int i=0; i<arr.length; i++){
             arr[i] = random.nextInt(100000);
         }
-        int n = arr.length;
+        int n = arr.length; // pravimo varijablu za duzinu niza
         for (int i = 0; i<n-1; i++){
             int min = i; // iniciramo minimum vrednost jer predopostavljamo da je najmanja vrednost na prvom mestu, kasnije koristimo za poziciju
             for (int j = i+1; j<n; j++){ // ovaj for loop sluzi samo da nadje najmanju vrednost zapravo
@@ -501,44 +503,44 @@ public class PerformanceAnalyzer {
     }
     //////////////// search algos
 
-    public static int linearSearch(int a){
+    public static int linearSearch(int a){ // metoda za linersearch algoritam, pretrazivanje u jednom smeru cele liste
         int[] arr = new int[100];
         Random random = new Random();
         for (int i=0; i<arr.length; i++){
             arr[i] = i;
-        }
-        int x = random.nextInt(100);
-        for (int i=0; i<arr.length; i++){
+        } // do ovde iniciramo niz sa random brojevima
+        int x = random.nextInt(100); // iniciramo broj koji cemo traziti
+        for (int i=0; i<arr.length; i++){ // iteriramo kroz niz
             if (arr[i] ==x){
-                return i;
+                return i; // ako ga ima vracamo njegovu vrednost
             }
 
         }
-        return -1;
+        return -1; // inace vracamo -1
     }
-    public static int binarySearch(int a){
+    public static int binarySearch(int a){ // metoda za binarysearch algoritam, pretrazivanje broja sa obe strane liste ka unutra (lista mora biti sortirana)
         int[] arr = new int[100];
         Random random = new Random();
         for (int i=0; i<arr.length; i++){
             arr[i] = i;
         }
         int x = random.nextInt(100);
-        int l=0;
-        int r=arr.length;
-        while (l<=r){
-            int m = (l+r)/2;
-            if (arr[m]==x){
+        int l=0; // pravimo levi pointer
+        int r=arr.length; // pravimo desni pointer
+        while (l<=r){ // izvrsavamo kod sve dok se ne susretnu na sredini
+            int m = (l+r)/2; // trazimo sredinu kako bismo mogli da pomeramo pokazivace u odnosu na njega
+            if (arr[m]==x){ // proveramo odmah ako je nas broj koji trazimo srednja vrednost niza odmah je vracamo
                 return m;
             }
-            else if(arr[m]>x){
+            else if(arr[m]>x){ // zatim gledamo ako je nasa sredina veca od broja koji trazimo pomeramo nas desni pokazivac na mesto levo od sredine (jedan broj manji)
                 r=m-1;
             }
-            else {
+            else { // a ako je sredina manja od broja kog trazimo, pomeramo nas levi pokazivac na jedan broj veci od sredine
                 l = m+1;
             }
 
 
         }
-        return -1;
+        return -1; // ako ne nadjemo broj u nizu vracamo -1
     }
 }
